@@ -1,0 +1,204 @@
+class spoon.support.reflect.declaration.CtFieldImpl : int a;
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtFieldImpl : String[] list = new String[]{ "tokyo", "osaka" };
+class spoon.support.reflect.reference.CtArrayTypeReferenceImpl : String[]
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtNewArrayImpl : new String[]{ "tokyo", "osaka" }
+class spoon.support.reflect.reference.CtArrayTypeReferenceImpl : String[]
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtLiteralImpl : "tokyo"
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtLiteralImpl : "osaka"
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.declaration.CtConstructorImpl : public Exper(int a) {
+    this.a = a;
+}
+class spoon.support.reflect.declaration.CtParameterImpl : int a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtBlockImpl : {
+    this.a = a;
+}
+class spoon.support.reflect.code.CtInvocationImpl : super()
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : java.lang.Object()
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Object
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Object
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtAssignmentImpl : this.a = a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtFieldWriteImpl : this.a
+class spoon.support.reflect.code.CtThisAccessImpl : this
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Exper
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtVariableReadImpl : a
+class spoon.support.reflect.reference.CtParameterReferenceImpl : a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtMethodImpl : public int getInt() {
+    return a;
+}
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtBlockImpl : {
+    return a;
+}
+class spoon.support.reflect.code.CtReturnImpl : return a
+class spoon.support.reflect.code.CtFieldReadImpl : a
+class spoon.support.reflect.code.CtThisAccessImpl : 
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Exper
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtMethodImpl : public String getString() {
+    return list[1];
+}
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtBlockImpl : {
+    return list[1];
+}
+class spoon.support.reflect.code.CtReturnImpl : return list[1]
+class spoon.support.reflect.code.CtArrayReadImpl : list[1]
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtFieldReadImpl : list
+class spoon.support.reflect.code.CtThisAccessImpl : 
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Exper
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : list
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtArrayTypeReferenceImpl : String[]
+class spoon.support.reflect.reference.CtTypeReferenceImpl : String
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.code.CtLiteralImpl : 1
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtConstructorImpl : Main() {
+}
+class spoon.support.reflect.code.CtBlockImpl : {
+}
+class spoon.support.reflect.code.CtInvocationImpl : super()
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : java.lang.Object()
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Object
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Object
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.declaration.CtFieldImpl : int field = 10;
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtLiteralImpl : 10
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtFieldImpl : Exper exper = new Exper(20);
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtConstructorCallImpl : new Exper(20)
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : com.experiment.Exper(int)
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtLiteralImpl : 20
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.declaration.CtMethodImpl : public void method() {
+    exper.getInt();
+    System.out.println(exper.a);
+    System.out.println(field);
+}
+class spoon.support.reflect.reference.CtTypeReferenceImpl : void
+class spoon.support.reflect.code.CtBlockImpl : {
+    exper.getInt();
+    System.out.println(exper.a);
+    System.out.println(field);
+}
+class spoon.support.reflect.code.CtInvocationImpl : exper.getInt()
+class spoon.support.reflect.code.CtFieldReadImpl : exper
+class spoon.support.reflect.code.CtThisAccessImpl : 
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Main
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : exper
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : getInt()
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtInvocationImpl : System.out.println(exper.a)
+class spoon.support.reflect.code.CtFieldReadImpl : System.out
+class spoon.support.reflect.code.CtTypeAccessImpl : System
+class spoon.support.reflect.reference.CtTypeReferenceImpl : System
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtFieldReferenceImpl : java.lang.System.out
+class spoon.support.reflect.reference.CtTypeReferenceImpl : System
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtTypeReferenceImpl : PrintStream
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.io
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : println(int)
+class spoon.support.reflect.reference.CtTypeReferenceImpl : PrintStream
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.io
+class spoon.support.reflect.reference.CtTypeReferenceImpl : void
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtFieldReadImpl : exper.a
+class spoon.support.reflect.code.CtFieldReadImpl : exper
+class spoon.support.reflect.code.CtThisAccessImpl : 
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Main
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : exper
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : a
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Exper
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtInvocationImpl : System.out.println(field)
+class spoon.support.reflect.code.CtFieldReadImpl : System.out
+class spoon.support.reflect.code.CtTypeAccessImpl : System
+class spoon.support.reflect.reference.CtTypeReferenceImpl : System
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtFieldReferenceImpl : java.lang.System.out
+class spoon.support.reflect.reference.CtTypeReferenceImpl : System
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.lang
+class spoon.support.reflect.reference.CtTypeReferenceImpl : PrintStream
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.io
+class spoon.support.reflect.reference.CtExecutableReferenceImpl : println(int)
+class spoon.support.reflect.reference.CtTypeReferenceImpl : PrintStream
+class spoon.support.reflect.reference.CtPackageReferenceImpl : java.io
+class spoon.support.reflect.reference.CtTypeReferenceImpl : void
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
+class spoon.support.reflect.code.CtFieldReadImpl : field
+class spoon.support.reflect.code.CtThisAccessImpl : 
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.code.CtTypeAccessImpl : Main
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtFieldReferenceImpl : field
+class spoon.support.reflect.reference.CtTypeReferenceImpl : Main
+class spoon.support.reflect.reference.CtPackageReferenceImpl : com.experiment
+class spoon.support.reflect.reference.CtTypeReferenceImpl : int
