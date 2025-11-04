@@ -25,18 +25,24 @@ public class NumOvererideMethod implements IAttribute {
     @Override
     public void calculate(ClassMetrics node) {
         int overrideNum = 0;
-        double ration = 0;
-        List<CtMethod> superMethods = (List<CtMethod>) node.getAttribute("superMethods");
+        float ration = 0;
+        List<CtMethod> superMethods = (List<CtMethod>) node.getAttribute("superClassMethods");
+        CtTypeReference superClass = node.getDeclaration().getSuperclass();
         Set<CtMethod> classMethods = node.getDeclaration().getMethods();
-        if (!classMethods.isEmpty() && !superMethods.isEmpty()) {
+        if (superClass == null) {       // 親クラスなし
+            node.setMetric(getName(), -1);
+            return;
+        }
+        if (classMethods != null && superMethods != null) {
             for (CtMethod method : classMethods) {
                 if (isOverride(method, superMethods)) {
                     overrideNum += 1;
                 }
             }
-            ration = overrideNum / classMethods.size();
+            ration = (float) overrideNum / classMethods.size();
+            System.out.println(node.getDeclaration().getQualifiedName() + " : " + overrideNum + "  " + classMethods.size());
         }
-        node.setAttribute(getName(), ration);
+        node.setMetric(getName(), ration);
     }
 
     public boolean isOverride(CtMethod newMethod, List<CtMethod> methods) {
@@ -68,10 +74,6 @@ public class NumOvererideMethod implements IAttribute {
         if (!childMethodReturn.equals(superMethodReturn)) {
             return false;
         }
-        if (!childMethodReturn.isSubtypeOf(superMethodReturn)) {
-            return false;
-        }
-
-        return true;
+        return childMethodReturn.isSubtypeOf(superMethodReturn);
     }
 }

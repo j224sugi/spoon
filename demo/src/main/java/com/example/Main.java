@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Launcher launcher = new Launcher();
 
-        String rootProject = "C:\\Users\\sugii syuji\\jsoup";
+        String rootProject = "C:\\Users\\syuuj\\jsoup";
         launcher.addInputResource(rootProject+"\\src\\main\\java");
         List<String> JarFile=addJarSourceFile(Paths.get(rootProject));
         //JarFile=filterConflictingJars(JarFile);
@@ -42,9 +42,8 @@ public class Main {
             clazz.accept(visitor);
             System.out.println();
         }
-        //visitor.printCSV(args[0]);
-        //visitor.excuteMetrics();
-        //visitor.printCSV(args[0]);*/
+        visitor.excuteMetrics();
+        visitor.printCSV(args[0]);
     }
 
     private static List<String> addJarSourceFile(Path path) throws IOException {

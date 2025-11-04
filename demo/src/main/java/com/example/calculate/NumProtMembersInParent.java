@@ -55,7 +55,7 @@ public class NumProtMembersInParent implements IAttribute {
         superClasses.clear();
         CtType current=node.getDeclaration();
 
-        while (true) { 
+        while (current!=null) { 
             if(current.getSuperclass()!=null){
                 superClasses.add(current.getSuperclass());
                 current=current.getSuperclass().getDeclaration();
@@ -72,7 +72,8 @@ public class NumProtMembersInParent implements IAttribute {
             }
             protMembers=ParentProtMethods.size()+ParentProtFields.size();
         }
-        node.setAttribute(getName(),protMembers);
+        node.setMetric(getName(),protMembers);
+        node.setAttribute("superClassMethods",ParentMethods);
 
     }
 
