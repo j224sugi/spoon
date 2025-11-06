@@ -3,7 +3,6 @@ package com.example;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -18,13 +17,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Launcher launcher = new Launcher();
 
-        String rootProject = "C:\\Users\\syuuj\\jsoup";
-        launcher.addInputResource(rootProject+"\\src\\main\\java");
-        List<String> JarFile=addJarSourceFile(Paths.get(rootProject));
+    
+        String rootProject = "C:\\Users\\sugii syuji\\test_spoon\\ATFD";
+        launcher.addInputResource(rootProject);
+        //List<String> JarFile=addJarSourceFile(Paths.get(rootProject));
         //JarFile=filterConflictingJars(JarFile);
-        String[] array = JarFile.toArray(new String[0]);
+        //String[] array = JarFile.toArray(new String[0]);
 
-        launcher.getEnvironment().setSourceClasspath(array);
+        //launcher.getEnvironment().setSourceClasspath(array);
 
         //launcher.getEnvironment().setNoClasspath(false);
         
@@ -38,9 +38,9 @@ public class Main {
         Visitor visitor = new Visitor();
 
         for (CtType<?> clazz : model.getAllTypes()) {
-            System.out.println(clazz.getQualifiedName());
+            //System.out.println(clazz.getQualifiedName());
             clazz.accept(visitor);
-            System.out.println();
+            //System.out.println();
         }
         visitor.excuteMetrics();
         visitor.printCSV(args[0]);

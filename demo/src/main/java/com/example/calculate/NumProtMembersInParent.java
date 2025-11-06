@@ -8,11 +8,8 @@ import com.example.node.ClassMetrics;
 import com.example.node.MethodMetrics;
 
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtFieldReference;
-import spoon.reflect.reference.CtReference;
 import spoon.reflect.reference.CtTypeReference;
 
 public class NumProtMembersInParent implements IAttribute {
@@ -30,7 +27,7 @@ public class NumProtMembersInParent implements IAttribute {
         this.ParentFields = new ArrayList<>();
         this.ParentProtMethods = new ArrayList<>();
         this.ParentProtFields = new ArrayList<>();
-        this.superClasses=new ArrayList<>();
+        this.superClasses = new ArrayList<>();
 
     }
 
@@ -46,43 +43,34 @@ public class NumProtMembersInParent implements IAttribute {
 
     @Override
     public void calculate(ClassMetrics node) {
-        int protMembers=0;
+        int protMembers = 0;
 
         ParentMethods.clear();
         ParentFields.clear();
         ParentProtMethods.clear();
         ParentProtFields.clear();
         superClasses.clear();
-        CtType current=node.getDeclaration();
-
-        while (current!=null) { 
-            if(current.getSuperclass()!=null){
-                superClasses.add(current.getSuperclass());
-                current=current.getSuperclass().getDeclaration();
-            }else{
-                break;
-            } 
-        }
-        if(!superClasses.isEmpty()){
-            for(CtTypeReference superClass:superClasses){
-                if(nameOfClasses.contains(superClass.getQualifiedName())){
+        superClasses = (List<CtTypeReference>) node.getAttribute("superClasses");
+        if (!superClasses.isEmpty()) {
+            for (CtTypeReference superClass : superClasses) {
+                if (nameOfClasses.contains(superClass.getQualifiedName())) {
                     ListProtMethods(superClass);
                     ListProtFields(superClass);
                 }
             }
-            protMembers=ParentProtMethods.size()+ParentProtFields.size();
+            protMembers = ParentProtMethods.size() + ParentProtFields.size();
         }
-        node.setMetric(getName(),protMembers);
-        node.setAttribute("superClassMethods",ParentMethods);
+        node.setMetric(getName(), protMembers);
+        node.setAttribute("superClassMethods", ParentMethods);
 
     }
 
-    public void ListProtFields(CtTypeReference superClass){
-        if(superClass.getDeclaredFields()!=null){
-            for(CtFieldReference field : superClass.getDeclaredFields()){
-                if(ParentFields.contains(field)){
+    public void ListProtFields(CtTypeReference superClass) {
+        if (superClass.getDeclaredFields() != null) {
+            for (CtFieldReference field : superClass.getDeclaredFields()) {
+                if (ParentFields.contains(field)) {
                     ParentFields.add(field);
-                    if(field.getModifiers().contains(ModifierKind.PROTECTED)){
+                    if (field.getModifiers().contains(ModifierKind.PROTECTED)) {
                         ParentProtFields.add(field);
                     }
 
@@ -91,13 +79,13 @@ public class NumProtMembersInParent implements IAttribute {
         }
     }
 
-    public void ListProtMethods(CtTypeReference superClass){
-        if(!superClass.getDeclaration().getMethods().isEmpty()){
-            Set<CtMethod> methods=superClass.getDeclaration().getMethods();
-            for(CtMethod method:methods){
-                if(!isOverriden(method,ParentMethods)){
+    public void ListProtMethods(CtTypeReference superClass) {
+        if (!superClass.getDeclaration().getMethods().isEmpty()) {
+            Set<CtMethod> methods = superClass.getDeclaration().getMethods();
+            for (CtMethod method : methods) {
+                if (!isOverriden(method, ParentMethods)) {
                     ParentMethods.add(method);
-                    if(method.isProtected()){
+                    if (method.isProtected()) {
                         ParentProtMethods.add(method);
                     }
                 }
@@ -105,16 +93,25 @@ public class NumProtMembersInParent implements IAttribute {
         }
     }
 
-    public boolean isOverriden(CtMethod newMethod,List<CtMethod> lowerLayerMethods){
-        for(CtMethod method:lowerLayerMethods){
-            if(isOverriden(newMethod,method)){
+    public boolean isOverriden(CtMethod newMethod, List<CtMethod> lowLayerMethods) {
+        for (CtMethod method : lowLayerMethods) {
+            if (method.isOverriding(newMethod)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isOverriden(CtMethod superMethod,CtMethod lowLayerMethod){
+    /*public boolean isOverriden(CtMethod newMethod,List<CtMethod> lowerLayerMethods){
+        for(CtMethod method:lowerLayerMethods){
+            if(isOverriden(newMethod,method)){
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+ /*public boolean isOverriden(CtMethod superMethod,CtMethod lowLayerMethod){
         if(!superMethod.getSimpleName().equals(lowLayerMethod.getSimpleName())){
             return false;
         }
@@ -138,6 +135,5 @@ public class NumProtMembersInParent implements IAttribute {
 
         return true;
 
-    }
-
+    }*/
 }

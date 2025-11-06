@@ -13,6 +13,7 @@ import com.example.calculate.AccessToData;
 import com.example.calculate.IAttribute;
 import com.example.calculate.NumOvererideMethod;
 import com.example.calculate.NumProtMembersInParent;
+import com.example.calculate.SuperClass;
 import com.example.node.ClassMetrics;
 import com.example.node.MethodMetrics;
 
@@ -29,8 +30,10 @@ public class Visitor extends CtScanner {
 
     public Visitor() {
         metricForMethod.add(new AccessToData());
+
+        metricForClass.add(new AccessToData());
         metricForClass.add(new NumProtMembersInParent(nameOfClasses));
-        metricForClass.add(new NumOvererideMethod(nameOfClasses));
+        metricForClass.add(new NumOvererideMethod());
 
     }
 
@@ -43,6 +46,12 @@ public class Visitor extends CtScanner {
     }
 
     public void excuteMetrics() {
+        for (CtClass clazz : classesMetrics.keySet()) {
+            ClassMetrics classMetrics = classesMetrics.get(clazz);
+            IAttribute superClass = new SuperClass();
+            superClass.calculate(classMetrics);
+
+        }
         classesMetrics.keySet().forEach(clazz -> {
             Set<CtMethod> methods = clazz.getMethods();
             ClassMetrics classMetrics = classesMetrics.get(clazz);
@@ -59,11 +68,9 @@ public class Visitor extends CtScanner {
         });
     }
 
-    @SuppressWarnings("unchecked")
     public void printCSV(String arg) throws IOException {
         int allMethod = 0;
         int allMethodError = 0;
-        int flag = 0;
         int allMethodExpr = 0;
         int allMethodExprError = 0;
         try {
@@ -75,6 +82,10 @@ public class Visitor extends CtScanner {
             pw.print("NprotM");
             pw.print(",");
             pw.print("BOvR");
+            pw.print(",");
+            pw.print("ATFD");
+            pw.print(",");
+            pw.print("ATLD");
             pw.println();
             for (CtClass clazz : classesMetrics.keySet()) {
                 ClassMetrics classMetrics = classesMetrics.get(clazz);
@@ -83,6 +94,10 @@ public class Visitor extends CtScanner {
                 pw.print(classMetrics.getMetric("NprotM"));
                 pw.print(",");
                 pw.print(classMetrics.getMetric("BOvR"));
+                pw.print(",");
+                pw.print(classMetrics.getMetric("ATFD"));
+                pw.print(",");
+                pw.print(classMetrics.getMetric("ATLD"));
                 pw.println();
             }
 

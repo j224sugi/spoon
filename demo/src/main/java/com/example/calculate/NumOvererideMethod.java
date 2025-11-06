@@ -1,5 +1,6 @@
 package com.example.calculate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -7,11 +8,10 @@ import com.example.node.ClassMetrics;
 import com.example.node.MethodMetrics;
 
 import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtParameter;
 import spoon.reflect.reference.CtTypeReference;
 
 public class NumOvererideMethod implements IAttribute {
-
+    List<String> listOfOverrideMethod;
     @Override
     public String getName() {
         return "BOvR";
@@ -26,6 +26,7 @@ public class NumOvererideMethod implements IAttribute {
     public void calculate(ClassMetrics node) {
         int overrideNum = 0;
         float ration = 0;
+        listOfOverrideMethod=new ArrayList<>();
         List<CtMethod> superMethods = (List<CtMethod>) node.getAttribute("superClassMethods");
         CtTypeReference superClass = node.getDeclaration().getSuperclass();
         Set<CtMethod> classMethods = node.getDeclaration().getMethods();
@@ -37,24 +38,26 @@ public class NumOvererideMethod implements IAttribute {
             for (CtMethod method : classMethods) {
                 if (isOverride(method, superMethods)) {
                     overrideNum += 1;
+                    listOfOverrideMethod.add(method.getSimpleName());
                 }
             }
             ration = (float) overrideNum / classMethods.size();
             System.out.println(node.getDeclaration().getQualifiedName() + " : " + overrideNum + "  " + classMethods.size());
         }
         node.setMetric(getName(), ration);
+        node.setAttribute("overrideMethod", listOfOverrideMethod);
     }
 
     public boolean isOverride(CtMethod newMethod, List<CtMethod> methods) {
         for (CtMethod method : methods) {
-            if (isOverride(newMethod, method)) {
+            if (newMethod.isOverriding(method)) {
                 return true;
             }
         }
         return false;
     }
-
-    public boolean isOverride(CtMethod childMethod, CtMethod superMethod) {
+}
+    /*public boolean isOverride(CtMethod childMethod, CtMethod superMethod) {
         if (!childMethod.getSimpleName().equals(superMethod.getSimpleName())) {
             return false;
         }
@@ -77,3 +80,5 @@ public class NumOvererideMethod implements IAttribute {
         return childMethodReturn.isSubtypeOf(superMethodReturn);
     }
 }
+*/
+//多分いらない

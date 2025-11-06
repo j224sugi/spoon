@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import spoon.reflect.code.CtFieldAccess;
 import spoon.reflect.code.CtFieldRead;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtTypeAccess;
@@ -31,14 +32,28 @@ public class ASTVisitor extends CtScanner {
         }
     }
 
-    @Override
-    public <T extends Object> void visitCtFieldRead(CtFieldRead<T> fieldRead) {                                     //静的フィールド、自クラスフィールド、他クラスフィールドのアクセス
+
+
+    /*if(isField(fieldRead)){
+            System.out.println(fieldRead.getVariable().getQualifiedName()+ "("+fieldRead.getPosition().getLine()+")");
+        }
+        
+        System.out.println("1 : " + fieldRead.getVariable().getQualifiedName() + " : " + fieldRead.getPosition().getLine());
+        if (fieldRead.getParent() != null) {
+            System.out.println("Parent " + fieldRead.getParent().getClass());
+        }
+        if (fieldRead.getTarget() != null) {
+            System.out.println("Target " + fieldRead.getTarget().getClass());
+        }
+        System.out.println("2 : " + fieldRead.getVariable().getDeclaringType().getQualifiedName());
+        System.out.println("3 : " + fieldRead.getType().getQualifiedName());
+
         if (isOnlyField(fieldRead)) {
             System.out.println(fieldRead.getVariable().getQualifiedName() + " : " + fieldRead.getPosition().getLine());
             System.out.println(fieldRead.getVariable().getDeclaringType().getQualifiedName());
             System.out.println(fieldRead.getType().getQualifiedName());
         }
-        /*CtElement parent = fieldRead.getParent();
+        CtElement parent = fieldRead.getParent();
         System.out.println("getType() : " + fieldRead.getType().getQualifiedName());
         System.out.println("getVariable() : " + fieldRead.getVariable().getQualifiedName() + " (fieldRead Line : " + fieldRead.getPosition().getLine() + " )");
         if (parent != null) {
@@ -53,9 +68,33 @@ public class ASTVisitor extends CtScanner {
             }
         }
         //System.out.println("getParent().getTarget()"+);*/
+    public boolean isField(CtFieldRead fieldRead) {
+        if (!isInvocation(fieldRead) && isLastField(fieldRead)) {
+            return true;
+        }
+        return false;
+    }
 
-        super.visitCtFieldRead(fieldRead);
+    public boolean isInvocation(CtFieldRead fieldRead) {        //instance.method()かどうか判別
+        CtElement parent = fieldRead.getParent();
+        if (parent != null && parent instanceof CtInvocation parentMethod) {
+            if (parentMethod.getTarget() != null && parentMethod.getTarget() instanceof CtFieldRead target) {
+                if (target.getVariable().getQualifiedName().equals(fieldRead.getVariable().getQualifiedName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public boolean isLastField(CtFieldRead fieldRead) {         //instance.fieldの時fieldのみを通す
+        CtElement parent = fieldRead.getParent();
+        if (parent != null && parent instanceof CtFieldAccess parentField) {
+            if (fieldRead.getType().getQualifiedName().equals(parentField.getVariable().getDeclaringType().getQualifiedName())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean isOnlyField(CtFieldRead fieldRead) {         //System.out.println(field)のfieldとclass.fieldを判断でき，
@@ -87,15 +126,4 @@ public class ASTVisitor extends CtScanner {
         return false;
     }
 
-    @Override
-    public <T extends Object> void visitCtInvocation(spoon.reflect.code.CtInvocation<T> invocation) {
-        super.visitCtInvocation(invocation);
-    }
-
-    @Override
-    public <T extends Object> void visitCtFieldWrite(spoon.reflect.code.CtFieldWrite<T> fieldWrite) {
-        //System.out.println("getType() : "+fieldWrite.getType().getQualifiedName());
-        //System.out.println("getVariable() : "+fieldWrite.getVariable().getQualifiedName()+" (Line : "+fieldWrite.getPosition().getLine()+")");
-        super.visitCtFieldWrite(fieldWrite);
-    }
 }
