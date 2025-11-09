@@ -1,0 +1,8 @@
+git log ⇒ logを入手する
+git log --stat ⇒ 変更されたファイルの一覧
+git log --oneline ⇒　logを一行で表示する
+git log --name-status ⇒　変更したファイルを表示
+git log --grep="fix"　⇒　fixが含まれるコミットログを取得
+git rev-list HEAD ⇒　HEADのハッシュを全取得する
+git rev-list --count HEAD ⇒　現在ブランチのコミット数を得る
+git diff --name-status [hash値] -- "*.java"　⇒　変更のあったjavaファイルを得る

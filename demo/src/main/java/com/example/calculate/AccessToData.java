@@ -39,6 +39,11 @@ public class AccessToData extends CtScanner implements IAttribute {
         }
         node.setMetric(getName(), sumOfATFD);
         node.setMetric("ATLD", sumOfATLD);
+        if (sumOfATFD > 0 || sumOfATLD > 0) {
+            node.setMetric("LAA", sumOfATLD / (sumOfATFD + sumOfATLD));
+        } else {
+            node.setMetric("LAA", -1);
+        }
     }
 
     @Override
@@ -60,12 +65,18 @@ public class AccessToData extends CtScanner implements IAttribute {
         node.setAttribute("ListOfLocalField", ListOfLocalField);
         node.setMetric(getName(), ListOfATFD.size());
         node.setMetric("ATLD", ListOfATLD.size());
+        float denominator = ListOfATFD.size() + ListOfATLD.size();
+        if (denominator <= 0) {
+            node.setMetric("LAA", -1);
+        } else {
+            node.setMetric("LAA", ListOfATLD.size() / denominator);
+        }
     }
 
     @Override
     public <T extends Object> void visitCtInvocation(CtInvocation<T> invocation) {
         try {
-            if (invocation.getExecutable().getType() != null) {
+            if (invocation.getExecutable().getDeclaringType() != null) {
                 String nameOfClass = invocation.getExecutable().getDeclaringType().getQualifiedName();
                 String nameOfMethod = invocation.getExecutable().getSimpleName();
                 if (!nameOfClass.equals(nameOfParentClass)) {
@@ -79,7 +90,7 @@ public class AccessToData extends CtScanner implements IAttribute {
                     if (nameOfMethod.startsWith("get") || nameOfMethod.startsWith("set")) {
                         ListOfATLD.add(nameOfClass);
                     }
-                    ListOfLocalInvocation.add(invocation);
+                    //ListOfLocalInvocation.add(invocation);　BURは親クラスのprotectedにおける使用数であるため，含めない，
                 }
             } else {
                 ListOfError.add(invocation.getExecutable().getSimpleName() + " error");

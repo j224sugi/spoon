@@ -1,8 +1,9 @@
-package com.example.calculate;
+package com.example.garbage;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.calculate.IAttribute;
 import com.example.node.ClassMetrics;
 import com.example.node.MethodMetrics;
 

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.calculate.AccessToData;
+import com.example.calculate.BaseClassUsageRation;
 import com.example.calculate.IAttribute;
 import com.example.calculate.NumOvererideMethod;
 import com.example.calculate.NumProtMembersInParent;
@@ -34,6 +35,7 @@ public class Visitor extends CtScanner {
         metricForClass.add(new AccessToData());
         metricForClass.add(new NumProtMembersInParent(nameOfClasses));
         metricForClass.add(new NumOvererideMethod());
+        metricForClass.add(new BaseClassUsageRation());
 
     }
 
@@ -76,7 +78,8 @@ public class Visitor extends CtScanner {
         try {
             FileWriter fw = new FileWriter("..\\create_data\\" + arg, false);
             PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
-
+            pw.print("File");
+            pw.print(",");
             pw.print("class");
             pw.print(",");
             pw.print("NprotM");
@@ -86,9 +89,15 @@ public class Visitor extends CtScanner {
             pw.print("ATFD");
             pw.print(",");
             pw.print("ATLD");
+            pw.print(",");
+            pw.print("LAA");
+            pw.print(",");
+            pw.print("BUR");
             pw.println();
             for (CtClass clazz : classesMetrics.keySet()) {
                 ClassMetrics classMetrics = classesMetrics.get(clazz);
+                pw.print(clazz.getPosition().getFile().getPath());
+                pw.print(",");
                 pw.print(clazz.getQualifiedName());
                 pw.print(",");
                 pw.print(classMetrics.getMetric("NprotM"));
@@ -98,6 +107,11 @@ public class Visitor extends CtScanner {
                 pw.print(classMetrics.getMetric("ATFD"));
                 pw.print(",");
                 pw.print(classMetrics.getMetric("ATLD"));
+                pw.print(",");
+                pw.print(classMetrics.getMetric("LAA"));
+                pw.print(",");
+                pw.print(classMetrics.getMetric("BUR"));
+
                 pw.println();
             }
 
