@@ -20,6 +20,7 @@ import com.example.node.MethodMetrics;
 
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtParameter;
 import spoon.reflect.visitor.CtScanner;
 
 public class Visitor extends CtScanner {
@@ -71,55 +72,67 @@ public class Visitor extends CtScanner {
     }
 
     public void printCSV(String arg) throws IOException {
-        int allMethod = 0;
-        int allMethodError = 0;
-        int allMethodExpr = 0;
-        int allMethodExprError = 0;
         try {
-            FileWriter fw = new FileWriter("..\\create_data\\" + arg, false);
-            PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
-            pw.print("File");
-            pw.print(",");
-            pw.print("class");
-            pw.print(",");
-            pw.print("NprotM");
-            pw.print(",");
-            pw.print("BOvR");
-            pw.print(",");
-            pw.print("ATFD");
-            pw.print(",");
-            pw.print("ATLD");
-            pw.print(",");
-            pw.print("LAA");
-            pw.print(",");
-            pw.print("BUR");
-            pw.println();
+            FileWriter fwClass = new FileWriter(arg + "spoonClass.csv", false);
+            PrintWriter pwClass = new PrintWriter(new BufferedWriter(fwClass));
+            FileWriter fwMethod = new FileWriter(arg + "spoonMethod.csv", false);
+            PrintWriter pwMethod = new PrintWriter(new BufferedWriter(fwMethod));
+            String[] metricOfClass = {"NprotM", "BOvR", "ATFD", "ATLD", "LAA", "BUR"};
+            String[] metricOfMethod = {"ATFD", "ATLD", "LAA"};
+
+            pwMethod.print("file");
+            pwMethod.print(",");
+            pwMethod.print("class");
+            pwMethod.print(",");
+            pwMethod.print("method");
+            for (String metric : metricOfMethod) {
+                pwMethod.print(",");
+                pwMethod.print(metric);
+            }
+            pwMethod.println();
+
+            pwClass.print("file");
+            pwClass.print(",");
+            pwClass.print("class");
+            for (String metric : metricOfClass) {
+                pwClass.print(",");
+                pwClass.print(metric);
+            }
+            pwClass.println();
+
             for (CtClass clazz : classesMetrics.keySet()) {
                 ClassMetrics classMetrics = classesMetrics.get(clazz);
-                pw.print(clazz.getPosition().getFile().getPath());
-                pw.print(",");
-                pw.print(clazz.getQualifiedName());
-                pw.print(",");
-                pw.print(classMetrics.getMetric("NprotM"));
-                pw.print(",");
-                pw.print(classMetrics.getMetric("BOvR"));
-                pw.print(",");
-                pw.print(classMetrics.getMetric("ATFD"));
-                pw.print(",");
-                pw.print(classMetrics.getMetric("ATLD"));
-                pw.print(",");
-                pw.print(classMetrics.getMetric("LAA"));
-                pw.print(",");
-                pw.print(classMetrics.getMetric("BUR"));
+                for (MethodMetrics methodMetrics : classMetrics.getMethodsMetrics()) {
+                    pwMethod.print(clazz.getPosition().getFile().getPath());
+                    pwMethod.print(",");
+                    pwMethod.print(clazz.getQualifiedName());
+                    pwMethod.print(",");
+                    CtMethod method = methodMetrics.getDeclaration();
+                    List<String> parameters = new ArrayList<>();
+                    List<CtParameter> methodParameter = method.getParameters();
+                    for (CtParameter param : methodParameter) {
+                        parameters.add(param.getType().getQualifiedName());
+                    }
+                    pwMethod.print("\"" + method.getSimpleName() + "/" + parameters.size() + parameters+"\"");
+                    for (String metric : metricOfMethod) {
+                        pwMethod.print(",");
+                        pwMethod.print(methodMetrics.getMetric(metric));
+                    }
+                    pwMethod.println();
+                }
 
-                pw.println();
+                pwClass.print(clazz.getPosition().getFile().getPath());
+                pwClass.print(",");
+                pwClass.print(clazz.getQualifiedName());
+                for (String metric : metricOfClass) {
+                    pwClass.print(",");
+                    pwClass.print(classMetrics.getMetric(metric));
+                }
+                pwClass.println();
             }
 
-            pw.close();
-            System.out.println("総メソッド数 : " + allMethod);
-            System.out.println("総エラーありメソッド数 : " + allMethodError);
-            System.out.println("総呼び出しメソッド数 : " + allMethodExpr);
-            System.out.println("総エラー数 : " + allMethodExprError);
+            pwClass.close();
+            pwMethod.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

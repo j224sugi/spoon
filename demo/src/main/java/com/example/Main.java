@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Launcher launcher = new Launcher();
 
-        String rootProject = "C:\\Users\\sugii syuji\\fastjson";
+        String rootProject = args[0];
         launcher.addInputResource(rootProject + "\\src\\main\\java");
         List<String> JarFile = addJarSourceFile(Paths.get(rootProject));
         //JarFile=filterConflictingJars(JarFile);
@@ -32,17 +32,15 @@ public class Main {
 
         CtModel model = launcher.buildModel();
 
-        System.out.println("Model built successfully!");
-        System.out.println("Classes found: " + model.getAllTypes().size());
+        //System.out.println("Model built successfully!");
+        //System.out.println("Classes found: " + model.getAllTypes().size());
         Visitor visitor = new Visitor();
 
         for (CtType<?> clazz : model.getAllTypes()) {
-            //System.out.println(clazz.getQualifiedName());
             clazz.accept(visitor);
-            //System.out.println();
         }
         visitor.excuteMetrics();
-        visitor.printCSV(args[0]);
+        visitor.printCSV(args[1]);
     }
 
     private static List<String> addJarSourceFile(Path path) throws IOException {
