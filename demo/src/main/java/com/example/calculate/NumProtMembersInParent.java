@@ -44,7 +44,6 @@ public class NumProtMembersInParent implements IAttribute {
     @Override
     public void calculate(ClassMetrics node) {
         int protMembers = 0;
-
         ParentMethods.clear();
         ParentFields.clear();
         ParentProtMethods.clear();
@@ -68,8 +67,7 @@ public class NumProtMembersInParent implements IAttribute {
     public void ListProtFields(CtTypeReference superClass) {
         if (superClass.getDeclaredFields() != null) {
             for (CtFieldReference field : superClass.getDeclaredFields()) {
-                if (ParentFields.contains(field)) {
-                    ParentFields.add(field);
+                if (!ParentFields.contains(field)) {
                     if (field.getModifiers().contains(ModifierKind.PROTECTED)) {
                         ParentProtFields.add(field);
                     }

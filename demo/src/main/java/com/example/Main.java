@@ -17,9 +17,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Launcher launcher = new Launcher();
-
+        if(args.length<2){
+            System.out.println("引数の数が間違っている");
+            return;
+        }
         String rootProject = args[0];
-        launcher.addInputResource(rootProject + "\\src\\main\\java");
+        launcher.addInputResource(rootProject);
+        // + "\\src\\main\\java");
         List<String> JarFile = addJarSourceFile(Paths.get(rootProject));
         //JarFile=filterConflictingJars(JarFile);
         String[] array = JarFile.toArray(String[]::new);

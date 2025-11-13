@@ -31,7 +31,7 @@ public class BaseClassUsageRation implements IAttribute {
     public void calculate(ClassMetrics node) {
         ListOfUseProtectMethod.clear();
         ListOfUseProtectField.clear();
-        if (node.getMetric("NprotM") == null || node.getMetric("NprotM") <= 0) {
+        if (node.getMetric("NprotM") == null || node.getMetric("NprotM") <= 0) {//NprotMが計算できていないもしくは、protectedがない場合
             node.setMetric(getName(), -1);
         } else {
             List<MethodMetrics> methodsMetrics = node.getMethodsMetrics();
@@ -53,19 +53,23 @@ public class BaseClassUsageRation implements IAttribute {
     }
 
     public void addFirstUseProtectedMethod(CtInvocation invocation) {
-        CtExecutable executable = invocation.getExecutable().getExecutableDeclaration();
-        if (executable != null && executable instanceof CtMethod methodDeclaration) {
-            if (methodDeclaration.isProtected() && ListOfUseProtectMethod.contains(methodDeclaration)) {
-                ListOfUseProtectMethod.add(methodDeclaration);
+        if (invocation.getExecutable() != null) {
+            CtExecutable executable = invocation.getExecutable().getExecutableDeclaration();
+            if (executable != null && executable instanceof CtMethod methodDeclaration) {
+                if (methodDeclaration.isProtected() && ListOfUseProtectMethod.contains(methodDeclaration)) {
+                    ListOfUseProtectMethod.add(methodDeclaration);
+                }
             }
         }
     }
 
     public void addFirstUseProtectedField(CtFieldAccess fieldAccess) {
-        CtField fieldDeclaration = fieldAccess.getVariable().getDeclaration();
-        if (fieldDeclaration != null && fieldDeclaration.isProtected()) {
-            if (ListOfUseProtectField.contains(fieldDeclaration)) {
-                ListOfUseProtectField.add(fieldDeclaration);
+        if (fieldAccess.getVariable() != null) {
+            CtField fieldDeclaration = fieldAccess.getVariable().getDeclaration();
+            if (fieldDeclaration != null && fieldDeclaration.isProtected()) {
+                if (ListOfUseProtectField.contains(fieldDeclaration)) {
+                    ListOfUseProtectField.add(fieldDeclaration);
+                }
             }
         }
     }
