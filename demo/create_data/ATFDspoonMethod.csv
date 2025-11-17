@@ -1,0 +1,16 @@
+file,class,method,ATFD,ATLD,LAA,FDP
+C:\Users\syuuj\spoon\test_metrics\ATFD\FDP.java,FDP,"getFDP/0[]",6.0,0.0,0.0,3.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\FDP.java,FDP,"getFDP2/0[]",2.0,0.0,0.0,2.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_D.java,ATFD_D,"getData/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_D.java,ATFD_D,"superMethod/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_C.java,ATFD_C,"getInt/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"getDirectField/0[]",1.0,0.0,0.0,1.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"getMethod/0[]",1.0,0.0,0.0,1.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"getThisClassInt/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"setAField/1[ATFD_A]",1.0,0.0,0.0,1.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"superMethod/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"thisChange/1[ATFD_A]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_B.java,ATFD_B,"variousPattern/0[]",7.0,4.0,0.36363637,3.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_A.java,ATFD_A,"getField/0[]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_A.java,ATFD_A,"getPrivateField/1[int]",0.0,1.0,1.0,0.0
+C:\Users\syuuj\spoon\test_metrics\ATFD\ATFD_A.java,ATFD_A,"setPrivateField/1[int]",0.0,1.0,1.0,0.0

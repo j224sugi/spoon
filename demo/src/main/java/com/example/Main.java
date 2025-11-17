@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 import spoon.Launcher;
@@ -17,27 +15,18 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Launcher launcher = new Launcher();
-        if(args.length<2){
+        if (args.length < 2) {
             System.out.println("引数の数が間違っている");
             return;
         }
         String rootProject = args[0];
-        launcher.addInputResource(rootProject);
-        // + "\\src\\main\\java");
+        launcher.addInputResource(rootProject+ "\\src\\main\\java");
         List<String> JarFile = addJarSourceFile(Paths.get(rootProject));
-        //JarFile=filterConflictingJars(JarFile);
         String[] array = JarFile.toArray(String[]::new);
-
         launcher.getEnvironment().setSourceClasspath(array);
-
-        //launcher.getEnvironment().setNoClasspath(false);
         launcher.getEnvironment().setCommentEnabled(false);
         launcher.getEnvironment().setAutoImports(true);
-
         CtModel model = launcher.buildModel();
-
-        //System.out.println("Model built successfully!");
-        //System.out.println("Classes found: " + model.getAllTypes().size());
         Visitor visitor = new Visitor();
 
         for (CtType<?> clazz : model.getAllTypes()) {
@@ -55,6 +44,9 @@ public class Main {
         return JarFile;
     }
 
+}
+/*    
+    //JarFile=filterConflictingJars(JarFile);
     private static List<String> filterConflictingJars(List<String> jars) {
         List<String> safe = new ArrayList<>();
         for (String jar : jars) {
@@ -74,5 +66,4 @@ public class Main {
             }
         }
         return safe;
-    }
-}
+    }*/

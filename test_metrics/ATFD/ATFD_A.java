@@ -18,4 +18,4 @@ public class ATFD_A {
     public void setPrivateField(int number) {
         this.privateField = number;
     }
-}//ATFD=0,ATLD=3
+}//ATFD=0,ATLD=3,FDP=0
