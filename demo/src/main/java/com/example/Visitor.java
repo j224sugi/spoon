@@ -11,6 +11,7 @@ import java.util.Set;
 
 import com.example.calculate.AccessToData;
 import com.example.calculate.BaseClassUsageRation;
+import com.example.calculate.ForeignDataProvider;
 import com.example.calculate.IAttribute;
 import com.example.calculate.NumOvererideMethod;
 import com.example.calculate.NumProtMembersInParent;
@@ -32,11 +33,13 @@ public class Visitor extends CtScanner {
 
     public Visitor() {
         metricForMethod.add(new AccessToData());
+        metricForMethod.add(new ForeignDataProvider());
 
         metricForClass.add(new AccessToData());
         metricForClass.add(new NumProtMembersInParent(nameOfClasses));
         metricForClass.add(new NumOvererideMethod());
         metricForClass.add(new BaseClassUsageRation());
+        metricForClass.add(new ForeignDataProvider());
 
     }
 
@@ -77,8 +80,8 @@ public class Visitor extends CtScanner {
             PrintWriter pwClass = new PrintWriter(new BufferedWriter(fwClass));
             FileWriter fwMethod = new FileWriter(arg + "spoonMethod.csv", false);
             PrintWriter pwMethod = new PrintWriter(new BufferedWriter(fwMethod));
-            String[] metricOfClass = {"NprotM", "BOvR", "ATFD", "ATLD", "LAA", "BUR"};
-            String[] metricOfMethod = {"ATFD", "ATLD", "LAA"};
+            String[] metricOfClass = {"NprotM", "BOvR", "ATFD", "ATLD", "LAA", "BUR","FDP"};
+            String[] metricOfMethod = {"ATFD", "ATLD", "LAA","FDP"};
 
             pwMethod.print("file");
             pwMethod.print(",");

@@ -100,38 +100,4 @@ public class NumProtMembersInParent implements IAttribute {
         return false;
     }
 
-    /*public boolean isOverriden(CtMethod newMethod,List<CtMethod> lowerLayerMethods){
-        for(CtMethod method:lowerLayerMethods){
-            if(isOverriden(newMethod,method)){
-                return true;
-            }
-        }
-        return false;
-    }*/
-
- /*public boolean isOverriden(CtMethod superMethod,CtMethod lowLayerMethod){
-        if(!superMethod.getSimpleName().equals(lowLayerMethod.getSimpleName())){
-            return false;
-        }
-
-        List<CtParameter> superMethodParam=superMethod.getParameters();
-        List<CtParameter> lowLayParameter=lowLayerMethod.getParameters();
-
-        if(superMethodParam.size()!=lowLayParameter.size()){
-            return false;
-        }
-        for(int i=0;i<superMethodParam.size();i++){
-            if(!superMethodParam.get(i).getType().equals(lowLayParameter.get(i).getType())){
-                return false;
-            }
-        }
-        CtReference superMethodReturn = superMethod.getType();
-        CtReference lowLayerReturn = lowLayerMethod.getType();
-        if(!superMethodReturn.equals(lowLayerReturn)){
-            return false;
-        }
-
-        return true;
-
-    }*/
 }

@@ -105,11 +105,13 @@ public class AccessToData extends CtScanner implements IAttribute {
     public <T extends Object> void visitCtFieldRead(CtFieldRead<T> fieldRead) {
         if (isField(fieldRead)) {
             String nameOfClass = fieldRead.getVariable().getDeclaringType().getQualifiedName();
-            if (isForeignClass(nameOfClass)) {
+            if (isForeignClass(nameOfClass)) {      //自クラス・親クラスではない場合
                 ListOfATFD.add(nameOfClass);
             } else {
                 ListOfATLD.add(nameOfClass);
-                ListOfLocalField.add(fieldRead);
+                if (!nameOfClass.equals(nameOfParentClass)) {
+                    ListOfLocalField.add(fieldRead);
+                }
             }
         }
     }
@@ -117,11 +119,13 @@ public class AccessToData extends CtScanner implements IAttribute {
     @Override
     public <T extends Object> void visitCtFieldWrite(spoon.reflect.code.CtFieldWrite<T> fieldWrite) {
         String nameOfClass = fieldWrite.getVariable().getDeclaringType().getQualifiedName();
-        if (isForeignClass(nameOfClass)) {
+        if (isForeignClass(nameOfClass)) {  
             ListOfATFD.add(nameOfClass);
         } else {
             ListOfATLD.add(nameOfClass);
-            ListOfLocalField.add(fieldWrite);
+            if (!nameOfClass.equals(nameOfParentClass)) {
+                ListOfLocalField.add(fieldWrite);
+            }
         }
     }
 

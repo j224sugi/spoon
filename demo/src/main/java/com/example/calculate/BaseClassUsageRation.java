@@ -56,7 +56,7 @@ public class BaseClassUsageRation implements IAttribute {
         if (invocation.getExecutable() != null) {
             CtExecutable executable = invocation.getExecutable().getExecutableDeclaration();
             if (executable != null && executable instanceof CtMethod methodDeclaration) {
-                if (methodDeclaration.isProtected() && ListOfUseProtectMethod.contains(methodDeclaration)) {
+                if (methodDeclaration.isProtected() && !ListOfUseProtectMethod.contains(methodDeclaration)) {
                     ListOfUseProtectMethod.add(methodDeclaration);
                 }
             }
@@ -67,7 +67,7 @@ public class BaseClassUsageRation implements IAttribute {
         if (fieldAccess.getVariable() != null) {
             CtField fieldDeclaration = fieldAccess.getVariable().getDeclaration();
             if (fieldDeclaration != null && fieldDeclaration.isProtected()) {
-                if (ListOfUseProtectField.contains(fieldDeclaration)) {
+                if (!ListOfUseProtectField.contains(fieldDeclaration)) {
                     ListOfUseProtectField.add(fieldDeclaration);
                 }
             }
